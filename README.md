@@ -4,7 +4,7 @@
 
 Cross 的方向是 AIoT 健康資料平台：廠商保留既有設備與系統，透過共用 App 與 API 將量測接起來。預約是平台的參考應用之一。
 
-本包是 **本機 Developer Preview 0.3.0** 的文件與範例，已涵蓋心率及合成單導程 ECG。[公開文件庫](https://github.com/twinhao/cross-developers)採用 [MIT 授權](LICENSE)，方便廠商使用與修改範例。沒有提供公開託管 API，也不是正式 SDK。
+本包是 **本機 Developer Preview 0.3.1** 的文件與範例，已涵蓋心率及合成單導程 ECG。[公開文件庫](https://github.com/twinhao/cross-developers)採用 [MIT 授權](LICENSE)，方便廠商使用與修改範例。沒有提供公開託管 API，也不是正式 SDK。
 
 ## 開始串接
 

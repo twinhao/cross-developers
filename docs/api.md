@@ -1,4 +1,4 @@
-# API 契約：Developer Preview 0.3.0
+# API 契約：Developer Preview 0.3.1
 
 請求與回應的機器可讀定義見 [OpenAPI](../openapi/cross-sandbox.openapi.json)。本版使用 Cross 原生 JSON，`schema_version=1.0`；API 實作版本與資料封套版本是兩個不同值。
 

@@ -30,7 +30,7 @@ def create_app(db_path: Path, token: str) -> FastAPI:
     store = Store(db_path)
     app = FastAPI(
         title="Cross 本機設備沙盒",
-        version="0.3.0",
+        version="0.3.1",
         description="Cross 原生設備資料的本機合成資料範例，只有單一沙盒身份；不是正式服務或完整 FHIR server。",
         servers=[{"url": "http://127.0.0.1:8002", "description": "本機虛構資料沙盒"}],
     )
