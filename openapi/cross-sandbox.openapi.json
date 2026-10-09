@@ -1,0 +1,1129 @@
+{
+  "components": {
+    "schemas": {
+      "Device": {
+        "additionalProperties": false,
+        "properties": {
+          "external_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "External Id",
+            "type": "string"
+          },
+          "firmware_version": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Firmware Version",
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "manufacturer": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Manufacturer",
+            "type": "string"
+          },
+          "model": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Model",
+            "type": "string"
+          },
+          "source_system": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "Source System",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "source_system",
+          "external_id",
+          "manufacturer",
+          "model",
+          "firmware_version"
+        ],
+        "title": "Device",
+        "type": "object"
+      },
+      "EcgMeasurement": {
+        "additionalProperties": false,
+        "properties": {
+          "device_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Device Id",
+            "type": "string"
+          },
+          "event_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "Event Id",
+            "type": "string"
+          },
+          "measured_at": {
+            "format": "date-time",
+            "title": "Measured At",
+            "type": "string"
+          },
+          "patient_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Patient Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "default": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "unit": {
+            "const": "uV",
+            "default": "uV",
+            "title": "Unit",
+            "type": "string"
+          },
+          "waveform": {
+            "$ref": "#/components/schemas/EcgWaveform"
+          }
+        },
+        "required": [
+          "event_id",
+          "patient_id",
+          "device_id",
+          "measured_at",
+          "waveform"
+        ],
+        "title": "EcgMeasurement",
+        "type": "object"
+      },
+      "EcgRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "device": {
+            "$ref": "#/components/schemas/Device"
+          },
+          "device_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Device Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "title": "Duration Ms",
+            "type": "number"
+          },
+          "event_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "Event Id",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "const": "ecg",
+            "default": "ecg",
+            "title": "Kind",
+            "type": "string"
+          },
+          "measured_at": {
+            "format": "date-time",
+            "title": "Measured At",
+            "type": "string"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "patient_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Patient Id",
+            "type": "string"
+          },
+          "received_at": {
+            "format": "date-time",
+            "title": "Received At",
+            "type": "string"
+          },
+          "sample_count": {
+            "title": "Sample Count",
+            "type": "integer"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "default": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "unit": {
+            "const": "uV",
+            "default": "uV",
+            "title": "Unit",
+            "type": "string"
+          },
+          "waveform": {
+            "$ref": "#/components/schemas/EcgWaveform"
+          }
+        },
+        "required": [
+          "event_id",
+          "patient_id",
+          "device_id",
+          "measured_at",
+          "waveform",
+          "id",
+          "received_at",
+          "patient",
+          "device",
+          "sample_count",
+          "duration_ms"
+        ],
+        "title": "EcgRecord",
+        "type": "object"
+      },
+      "EcgWaveform": {
+        "additionalProperties": false,
+        "properties": {
+          "calibration": {
+            "const": "physical-microvolts",
+            "title": "Calibration",
+            "type": "string"
+          },
+          "filtering": {
+            "const": "none",
+            "title": "Filtering",
+            "type": "string"
+          },
+          "lead": {
+            "const": "I",
+            "title": "Lead",
+            "type": "string"
+          },
+          "sample_rate_hz": {
+            "maximum": 1000.0,
+            "minimum": 50.0,
+            "title": "Sample Rate Hz",
+            "type": "integer"
+          },
+          "sample_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Sample Sha256",
+            "type": "string"
+          },
+          "samples": {
+            "items": {
+              "maximum": 100000.0,
+              "minimum": -100000.0,
+              "type": "integer"
+            },
+            "maxItems": 5000,
+            "minItems": 2,
+            "title": "Samples",
+            "type": "array"
+          },
+          "signal_origin": {
+            "const": "simulator",
+            "title": "Signal Origin",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lead",
+          "sample_rate_hz",
+          "samples",
+          "sample_sha256",
+          "signal_origin",
+          "calibration",
+          "filtering"
+        ],
+        "title": "EcgWaveform",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "IngestReceipt": {
+        "additionalProperties": false,
+        "properties": {
+          "duplicate": {
+            "title": "Duplicate",
+            "type": "boolean"
+          },
+          "measurement": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementRecord"
+              },
+              {
+                "$ref": "#/components/schemas/EcgRecord"
+              }
+            ],
+            "title": "Measurement"
+          }
+        },
+        "required": [
+          "duplicate",
+          "measurement"
+        ],
+        "title": "IngestReceipt",
+        "type": "object"
+      },
+      "Measurement": {
+        "additionalProperties": false,
+        "properties": {
+          "device_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Device Id",
+            "type": "string"
+          },
+          "event_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "Event Id",
+            "type": "string"
+          },
+          "heart_rate": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 400.0,
+            "title": "Heart Rate",
+            "type": "number"
+          },
+          "measured_at": {
+            "format": "date-time",
+            "title": "Measured At",
+            "type": "string"
+          },
+          "patient_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Patient Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "default": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "unit": {
+            "const": "/min",
+            "default": "/min",
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "event_id",
+          "patient_id",
+          "device_id",
+          "measured_at",
+          "heart_rate"
+        ],
+        "title": "Measurement",
+        "type": "object"
+      },
+      "MeasurementRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "device": {
+            "$ref": "#/components/schemas/Device"
+          },
+          "device_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Device Id",
+            "type": "string"
+          },
+          "event_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "Event Id",
+            "type": "string"
+          },
+          "heart_rate": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 400.0,
+            "title": "Heart Rate",
+            "type": "number"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "const": "heart_rate",
+            "default": "heart_rate",
+            "title": "Kind",
+            "type": "string"
+          },
+          "measured_at": {
+            "format": "date-time",
+            "title": "Measured At",
+            "type": "string"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "patient_id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Patient Id",
+            "type": "string"
+          },
+          "received_at": {
+            "format": "date-time",
+            "title": "Received At",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "default": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "unit": {
+            "const": "/min",
+            "default": "/min",
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "event_id",
+          "patient_id",
+          "device_id",
+          "measured_at",
+          "heart_rate",
+          "id",
+          "received_at",
+          "patient",
+          "device"
+        ],
+        "title": "MeasurementRecord",
+        "type": "object"
+      },
+      "Patient": {
+        "additionalProperties": false,
+        "properties": {
+          "external_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "External Id",
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^demo-[A-Za-z0-9.-]{1,50}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "source_system": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "title": "Source System",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "source_system",
+          "external_id"
+        ],
+        "title": "Patient",
+        "type": "object"
+      },
+      "SandboxError": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            ],
+            "title": "Detail"
+          }
+        },
+        "required": [
+          "detail"
+        ],
+        "title": "SandboxError",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "description": "Cross 原生設備資料的本機合成資料範例，只有單一沙盒身份；不是正式服務或完整 FHIR server。",
+    "title": "Cross 本機設備沙盒",
+    "version": "0.3.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/devices": {
+      "post": {
+        "operationId": "register_device_api_v1_devices_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Device"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            },
+            "description": "首次登錄設備"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "識別碼或原事件內容衝突"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "輸入格式錯誤或參照未登錄"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Register Device",
+        "tags": [
+          "登錄"
+        ]
+      }
+    },
+    "/api/v1/devices/{entity_id}": {
+      "get": {
+        "operationId": "read_device_api_v1_devices__entity_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity_id",
+            "required": true,
+            "schema": {
+              "title": "Entity Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "查無登錄資料或量測"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Read Device",
+        "tags": [
+          "登錄"
+        ]
+      }
+    },
+    "/api/v1/measurements/ecg": {
+      "post": {
+        "operationId": "ingest_ecg_api_v1_measurements_ecg_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EcgMeasurement"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestReceipt"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestReceipt"
+                }
+              }
+            },
+            "description": "首次保存波形"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "識別碼或原事件內容衝突"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "輸入格式錯誤或參照未登錄"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Ingest Ecg",
+        "tags": [
+          "量測"
+        ]
+      }
+    },
+    "/api/v1/measurements/heart-rate": {
+      "post": {
+        "operationId": "ingest_api_v1_measurements_heart_rate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Measurement"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestReceipt"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestReceipt"
+                }
+              }
+            },
+            "description": "首次保存量測"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "識別碼或原事件內容衝突"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "輸入格式錯誤或參照未登錄"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Ingest",
+        "tags": [
+          "量測"
+        ]
+      }
+    },
+    "/api/v1/measurements/{measurement_id}": {
+      "get": {
+        "operationId": "read_measurement_api_v1_measurements__measurement_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "measurement_id",
+            "required": true,
+            "schema": {
+              "title": "Measurement Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/MeasurementRecord"
+                    },
+                    {
+                      "$ref": "#/components/schemas/EcgRecord"
+                    }
+                  ],
+                  "title": "Response Read Measurement Api V1 Measurements  Measurement Id  Get"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "查無登錄資料或量測"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Read Measurement",
+        "tags": [
+          "量測"
+        ]
+      }
+    },
+    "/api/v1/measurements/{measurement_id}/export/fhir": {
+      "get": {
+        "operationId": "export_fhir_api_v1_measurements__measurement_id__export_fhir_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "measurement_id",
+            "required": true,
+            "schema": {
+              "title": "Measurement Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "查無登錄資料或量測"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "ECG 的 FHIR 映射尚未驗證"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Export Fhir",
+        "tags": [
+          "選用匯出"
+        ]
+      }
+    },
+    "/api/v1/patients": {
+      "post": {
+        "operationId": "register_patient_api_v1_patients_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Patient"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            },
+            "description": "首次登錄病人"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "識別碼或原事件內容衝突"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "輸入格式錯誤或參照未登錄"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Register Patient",
+        "tags": [
+          "登錄"
+        ]
+      }
+    },
+    "/api/v1/patients/{entity_id}": {
+      "get": {
+        "operationId": "read_patient_api_v1_patients__entity_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity_id",
+            "required": true,
+            "schema": {
+              "title": "Entity Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "需要有效沙盒授權碼"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxError"
+                }
+              }
+            },
+            "description": "查無登錄資料或量測"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Read Patient",
+        "tags": [
+          "登錄"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "本機虛構資料沙盒",
+      "url": "http://127.0.0.1:8002"
+    }
+  ]
+}

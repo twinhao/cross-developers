@@ -1,0 +1,8 @@
+{
+  "id": "demo-device-001",
+  "source_system": "demo-vendor",
+  "external_id": "demo-serial-001",
+  "manufacturer": "Cross 模擬廠商",
+  "model": "模擬量測裝置",
+  "firmware_version": "simulator-1.0"
+}

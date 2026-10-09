@@ -1,0 +1,7 @@
+{
+  "event_id": "demo-measurement-001",
+  "patient_id": "demo-patient-001",
+  "device_id": "demo-device-001",
+  "measured_at": "2026-10-06T10:00:00+08:00",
+  "heart_rate": 72
+}
